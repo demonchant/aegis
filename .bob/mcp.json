@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "aegis": {
+      "command": "node",
+      "args": ["mcp-server.js"],
+      "env": {
+        "AEGIS_OPERATOR_EMAIL": "set-your-account-email-before-starting-bob"
+      }
+    }
+  }
+}
