@@ -11,6 +11,6 @@
     "verify:evidence": "node scripts/verify-evidence.js"
   },
   "engines": {
-    "node": ">=22.5"
+    "node": ">=24"
   }
 }

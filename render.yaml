@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: aegis
+    runtime: docker
+    plan: 2c-4g
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: AEGIS_DB_PATH
+        value: /var/data/aegis.db
+      - key: AEGIS_EVIDENCE_DIR
+        value: /var/data/evidence
+      - key: BOB_API_KEY
+        sync: false
+      - key: BOB_MAX_COST
+        value: "0.25"
+      - key: BOB_MAX_TURNS
+        value: "6"
+      - key: BOB_TIMEOUT_MS
+        value: "180000"
+      - key: AEGIS_FETCH_TIMEOUT_MS
+        value: "120000"
+      - key: AEGIS_MAX_REPO_BYTES
+        value: "104857600"
+      - key: AEGIS_MAX_REPO_FILES
+        value: "5000"
+      - key: AEGIS_MAX_REVIEW_FILES
+        value: "50"
+    disk:
+      name: aegis-data
+      mountPath: /var/data
+      sizeGB: 10

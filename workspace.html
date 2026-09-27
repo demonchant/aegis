@@ -1,1 +1,58 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Aegis | Workspace</title><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" /><link rel="stylesheet" href="styles.css" /></head><body class="appBody"><aside class="sideNav"><a class="brand" href="index.html"><span class="brandMark">A</span><span>Aegis</span></a><nav><a class="active" href="workspace.html"><span>◫</span> Workspace</a><a href="review.html"><span>◉</span> Reviews <i>3</i></a><a href="guide.html"><span>□</span> Runbooks</a><a href="settings.html"><span>⚙</span> Preferences</a></nav><div class="sideProfile"><span class="avatar">OD</span><div><b>Damilola</b><small>Security studio</small></div><button aria-label="Open account menu">⌄</button></div></aside><main class="appMain"><header class="appHeader"><div><p class="eyebrow">Your security workspace</p><h1>Good afternoon, Damilola.</h1></div><button class="iconButton" data-toast="Notifications are up to date" aria-label="Notifications">♧<span></span></button></header><section class="commandCard"><div class="commandArt"><img src="assets/visual1.png" alt="Abstract security workspace" /></div><div><span class="eyebrow">Start with a single change</span><h2>What would you like to review?</h2><p>Aegis scopes every review before analysis begins. You remain in control of the context you share.</p><div class="sourceTabs" role="tablist"><button class="selected" data-source="Patch">Paste a patch</button><button data-source="Repository">Repository link</button><button data-source="Pull request">Pull request</button></div><form id="reviewForm"><label for="reviewInput" id="inputLabel">Paste your diff or a focused code excerpt</label><textarea id="reviewInput" maxlength="8000" placeholder="Add the change you want to inspect…"></textarea><div class="formFooter"><small><span class="shieldIcon">✓</span> Content stays in this browser demo</small><button class="button" type="submit">Scope review <span>→</span></button></div></form></div></section><section class="workspaceSection"><div class="sectionBar"><div><p class="eyebrow">Recent activity</p><h2>Keep momentum visible.</h2></div><a href="review.html">View all reviews <span>→</span></a></div><div class="reviewList"><a class="reviewRow" href="review.html" data-loader><span class="reviewIcon amber">!</span><div><b>Authentication middleware update</b><small>Reviewed today at 14:32</small></div><span class="riskTag elevated">Elevated</span><span class="rowArrow">→</span></a><a class="reviewRow" href="review.html" data-loader><span class="reviewIcon cyan">✓</span><div><b>Client side input validation</b><small>Reviewed yesterday at 18:06</small></div><span class="riskTag clear">Clear</span><span class="rowArrow">→</span></a><a class="reviewRow" href="review.html" data-loader><span class="reviewIcon violet">◌</span><div><b>Session token lifecycle</b><small>Awaiting decision</small></div><span class="riskTag review">Needs review</span><span class="rowArrow">→</span></a></div></section></main><div class="loaderOverlay" aria-live="polite" aria-hidden="true"><div class="loaderBox"><span class="spinner"></span><b>Preparing your review</b><small>Checking scope and context</small></div></div><div class="toast" role="status"></div><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aegis | Security reviews</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="app.css" />
+  <link rel="stylesheet" href="hosted.css" />
+</head>
+<body class="appBody" data-page="workspace">
+  <aside class="sideNav">
+    <a class="brand" href="index.html"><span class="brandMark">A</span><span>Aegis</span></a>
+    <nav>
+      <a class="active" href="workspace.html"><span>◫</span> Workspace</a>
+      <a href="#recentReviews"><span>◉</span> Reviews</a>
+      <a href="proof.html"><span>◇</span> Proof</a>
+      <a href="settings.html"><span>⚙</span> Preferences</a>
+    </nav>
+    <div class="sideProfile"><span class="avatar">A</span><div><b>Aegis user</b><small>Security workspace</small></div><button data-logout aria-label="Sign out">↪</button></div>
+  </aside>
+  <main class="appMain">
+    <header class="appHeader">
+      <div><p class="eyebrow">Your security workspace</p><h1>Review a public repository.</h1><p class="lead">IBM Bob reasons over the code. Aegis anchors every accepted finding to immutable evidence.</p></div>
+    </header>
+    <section class="commandCard productReviewCard">
+      <div class="commandArt"><img src="assets/visual1.png" alt="Abstract protected code workspace" /></div>
+      <div>
+        <span class="eyebrow">New verified review</span>
+        <h2>Paste a public GitHub repository URL.</h2>
+        <p>The server obtains an isolated copy. Submitted repository code is never executed.</p>
+        <form id="reviewForm" class="repositoryReviewForm">
+          <label for="repositoryUrl">Repository URL
+            <input id="repositoryUrl" name="repositoryUrl" type="url" required maxlength="300" placeholder="https://github.com/owner/repository" />
+          </label>
+          <label for="reviewReference">Branch, commit SHA, or PR URL <small>(optional)</small>
+            <input id="reviewReference" name="reference" maxlength="300" placeholder="main or https://github.com/owner/repository/pull/42" />
+          </label>
+          <label for="reviewScope">Review scope / paths <small>(optional, comma or line separated)</small>
+            <textarea id="reviewScope" name="scope" maxlength="2000" placeholder="src/auth/**&#10;server/routes.js"></textarea>
+          </label>
+          <p class="formMessage" id="reviewFormMessage" role="alert"></p>
+          <div class="formFooter"><small><span class="shieldIcon">✓</span> GitHub public repositories only</small><button class="button" type="submit">Start Security Review <span>→</span></button></div>
+        </form>
+      </div>
+    </section>
+    <section class="workspaceSection" id="recentReviews">
+      <div class="sectionBar"><div><p class="eyebrow">Persistent review history</p><h2>Your recent reviews.</h2></div><button class="button buttonGhost buttonSmall" id="refreshReviews">Refresh</button></div>
+      <div class="reviewList" id="reviewList"><div class="emptyState">Loading reviews…</div></div>
+    </section>
+  </main>
+  <div class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>

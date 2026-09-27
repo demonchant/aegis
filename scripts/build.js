@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const root = path.resolve(__dirname, '..');
-const required = ['index.html', 'workspace.html', 'proof.html', 'styles.css', 'app.js', '.bob/mcp.json', 'README.md', 'vercel.json'];
+const required = ['index.html', 'workspace.html', 'review.html', 'proof.html', 'styles.css', 'hosted.css', 'app.js', '.bob/mcp.json', 'README.md', 'Dockerfile', 'render.yaml'];
 for (const file of required) {
   if (!fs.existsSync(path.join(root, file))) throw new Error(`Required build artifact is missing: ${file}`);
 }
@@ -28,7 +28,7 @@ fs.rmSync(output, { recursive: true, force: true });
 fs.mkdirSync(output, { recursive: true });
 const publicFiles = [
   'index.html', 'workspace.html', 'review.html', 'guide.html', 'settings.html', 'account.html', 'data-handling.html', 'repository.html', 'proof.html',
-  'styles.css', 'app.css', 'account.css', 'hero-carousel.css',
+  'styles.css', 'app.css', 'hosted.css', 'account.css', 'hero-carousel.css',
   'app.js', 'owner.js', 'privacy.js', 'repository.js', 'review-live.js', 'hero-carousel.js', 'proof.js',
   'assets', 'evidence/canonical-proof.json',
 ];

@@ -6,11 +6,19 @@ const files = [
   'server.js',
   'mcp-server.js',
   'src/aegis-core.js',
+  'src/bob-runner.js',
+  'src/repository-ingestion.js',
+  'src/review-orchestrator.js',
+  'src/review-store.js',
   'scripts/demo.js',
   'scripts/verify-evidence.js',
   'scripts/build.js',
   'tests/aegis-core.test.js',
   'tests/mcp-server.test.js',
+  'tests/bob-runner.test.js',
+  'tests/repository-ingestion.test.js',
+  'tests/review-orchestrator.test.js',
+  'tests/server-api.test.js',
 ];
 for (const file of files) {
   const source = fs.readFileSync(path.join(root, file), 'utf8');

@@ -1,0 +1,10 @@
+.git
+.env*
+.vercel
+data
+dist
+evidence/reviews
+node_modules
+tests
+video
+*.mp4

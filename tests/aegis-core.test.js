@@ -48,3 +48,14 @@ test('workspace traversal is refused', () => {
   const context = fixture();
   assert.throws(() => prepareReview({ ...context, sourceEventId: 'escape', title: 'Escape', files: ['../secret.txt'] }), /inside the workspace/);
 });
+
+test('finding is rejected when a prepared file changes', () => {
+  const context = fixture();
+  const prepared = prepareReview({ ...context, sourceEventId: 'changed-before-record', title: 'Changed file', files: ['src/auth.js'] });
+  fs.writeFileSync(path.join(context.workspaceRoot, 'src', 'auth.js'), 'const role = user.role;\n');
+  assert.throws(() => recordFinding({
+    ...context,
+    reviewId: prepared.review.reviewId,
+    finding: { file: 'src/auth.js', lineStart: 1, severity: 'high', category: 'authorization', claim: 'Old claim.', remediation: 'Use session state.' },
+  }), /changed after preparation/);
+});

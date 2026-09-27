@@ -34,8 +34,12 @@ function resolveWorkspaceFile(workspaceRoot, relativePath) {
   const root = path.resolve(workspaceRoot);
   const resolved = path.resolve(root, requested);
   if (resolved !== root && !resolved.startsWith(`${root}${path.sep}`)) throw new Error('File path must stay inside the workspace.');
-  const stat = fs.statSync(resolved, { throwIfNoEntry: false });
-  if (!stat || !stat.isFile()) throw new Error(`File does not exist: ${requested}`);
+  const linkStat = fs.lstatSync(resolved, { throwIfNoEntry: false });
+  if (!linkStat || !linkStat.isFile() || linkStat.isSymbolicLink()) throw new Error(`File does not exist or is not a regular file: ${requested}`);
+  const realRoot = fs.realpathSync(root);
+  const realFile = fs.realpathSync(resolved);
+  if (realFile !== realRoot && !realFile.startsWith(`${realRoot}${path.sep}`)) throw new Error('File path must stay inside the workspace.');
+  const stat = fs.statSync(realFile);
   if (stat.size > 512 * 1024) throw new Error(`File is too large to anchor safely: ${requested}`);
   return { requested, resolved };
 }
@@ -65,7 +69,7 @@ function readReview(evidenceDirectory, reviewId) {
   return review;
 }
 
-function prepareReview({ workspaceRoot, evidenceDirectory, sourceEventId, title, files }) {
+function prepareReview({ workspaceRoot, evidenceDirectory, sourceEventId, title, files, metadata = null }) {
   const source = assertString(sourceEventId, 'sourceEventId', 200);
   const safeTitle = assertString(title, 'title', 200);
   if (!Array.isArray(files) || files.length === 0 || files.length > 50) throw new Error('files must contain between 1 and 50 workspace-relative paths.');
@@ -79,6 +83,7 @@ function prepareReview({ workspaceRoot, evidenceDirectory, sourceEventId, title,
     reviewId,
     sourceEventId: source,
     title: safeTitle,
+    metadata: metadata && typeof metadata === 'object' ? stable(metadata) : null,
     status: 'PREPARED',
     idempotencyKey,
     preparedAt: new Date().toISOString(),
@@ -119,7 +124,7 @@ function recordFinding({ workspaceRoot, evidenceDirectory, reviewId, finding }) 
   return { finding: stored, reused: false };
 }
 
-function verifyReview({ workspaceRoot, evidenceDirectory, reviewId }) {
+function verifyReview({ workspaceRoot, evidenceDirectory, reviewId, sponsorExecutionId, publishCanonical = true }) {
   const review = readReview(evidenceDirectory, reviewId);
   const checkedFiles = review.files.map((snapshot) => {
     try {
@@ -131,7 +136,9 @@ function verifyReview({ workspaceRoot, evidenceDirectory, reviewId }) {
   });
   const postconditionPassed = checkedFiles.every((item) => item.current) && review.findings.length > 0;
   const nextStatus = postconditionPassed ? 'VERIFIED' : 'BLOCKED';
+  const executionId = sponsorExecutionId || process.env.BOB_SESSION_ID || null;
   if (review.verification && review.verification.afterState?.status === nextStatus &&
+      review.verification.sponsorExecutionId === executionId &&
       canonicalJson(review.verification.checkedFiles) === canonicalJson(checkedFiles) &&
       canonicalJson(review.verification.findings) === canonicalJson(review.findings)) {
     return review.verification;
@@ -143,7 +150,8 @@ function verifyReview({ workspaceRoot, evidenceDirectory, reviewId }) {
     reviewId: review.reviewId,
     idempotencyKey: review.idempotencyKey,
     sponsor: 'IBM Bob 2.0 via MCP',
-    sponsorExecutionId: process.env.BOB_SESSION_ID || null,
+    sponsorExecutionId: executionId,
+    source: review.metadata,
     beforeState: { status: 'PREPARED', fileCount: review.files.length },
     afterState: { status: review.status, findingCount: review.findings.length },
     checkedFiles,
@@ -154,7 +162,7 @@ function verifyReview({ workspaceRoot, evidenceDirectory, reviewId }) {
   proof.receiptSha256 = digest(proof);
   review.verification = proof;
   writeJson(reviewPath(evidenceDirectory, review.reviewId), review);
-  writeJson(path.join(evidenceDirectory, 'canonical-proof.json'), proof);
+  if (publishCanonical) writeJson(path.join(evidenceDirectory, 'canonical-proof.json'), proof);
   return proof;
 }
 
