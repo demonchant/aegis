@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "sourceEventId": "aegis-demo-auth-boundary-v1",
+  "reviewId": "fcbe68e7b70b5025df22a513",
+  "idempotencyKey": "fcbe68e7b70b5025df22a5138df3472e15810d2a09ff9cedc25dc69d469f70b5",
+  "sponsor": "IBM Bob 2.0 via MCP",
+  "sponsorExecutionId": null,
+  "beforeState": {
+    "status": "PREPARED",
+    "fileCount": 1
+  },
+  "afterState": {
+    "status": "VERIFIED",
+    "findingCount": 1
+  },
+  "checkedFiles": [
+    {
+      "path": "examples/vulnerable-auth.js",
+      "expectedSha256": "c47125749b802d03a502837560742d448a351c0a623ea769dce806568adef8c0",
+      "actualSha256": "c47125749b802d03a502837560742d448a351c0a623ea769dce806568adef8c0",
+      "current": true
+    }
+  ],
+  "findings": [
+    {
+      "findingId": "a649adedd3e18bb4ab450715",
+      "file": "examples/vulnerable-auth.js",
+      "lineStart": 3,
+      "lineEnd": 3,
+      "severity": "high",
+      "category": "CWE-639 Authorization Bypass Through User-Controlled Key",
+      "claim": "A caller can choose the role used for authorization by supplying request.body.role.",
+      "remediation": "Derive the authorization role only from the verified server-side session or user record.",
+      "evidenceSha256": "be15923226fcea7954e70b98304fde07442368d8c670332b6d3220828a2719b9",
+      "fileSha256": "c47125749b802d03a502837560742d448a351c0a623ea769dce806568adef8c0",
+      "recordedAt": "2026-09-27T08:58:50.940Z"
+    }
+  ],
+  "postconditionPassed": true,
+  "verifiedAt": "2026-09-27T08:58:50.944Z",
+  "receiptSha256": "662fb7a7996a08e62d48fe7f37c0e07330c4afdee99c9df9f3b80d9720727060"
+}

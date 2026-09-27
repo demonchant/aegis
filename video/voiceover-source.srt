@@ -1,0 +1,71 @@
+1
+00:00:00,100 --> 00:00:02,535
+Developers move fast.
+
+2
+00:00:02,485 --> 00:00:10,271
+But in a complex codebase, one small change can open a security path nobody sees until it is too late.
+
+3
+00:00:10,271 --> 00:00:13,695
+Aegis finds that risk before it ships.
+
+4
+00:00:13,695 --> 00:00:19,741
+This is Aegis, a defensive security workspace built with IBM Bob in mind.
+
+5
+00:00:19,741 --> 00:00:26,725
+It turns repository context into an understandable security conversation for the people building the software.
+
+6
+00:00:26,725 --> 00:00:30,353
+The journey begins with a secure local account.
+
+7
+00:00:30,353 --> 00:00:39,796
+Each workspace is protected with a salted password hash and a secure session, so the developer starts from a private place to reason about risk.
+
+8
+00:00:39,796 --> 00:00:49,538
+From the workspace, a developer can submit a focused code change, or choose exactly which local repository files Aegis is allowed to inspect.
+
+9
+00:00:49,538 --> 00:00:53,437
+The scope is visible before analysis begins.
+
+10
+00:00:53,437 --> 00:01:08,002
+The local scan checks the selected source files for high impact patterns such as request controlled roles, unsafe HTML rendering, dynamic code execution, shell invocation, and possible hardcoded secrets.
+
+11
+00:01:08,002 --> 00:01:12,812
+Instead of a vague warning, Aegis gives the developer evidence.
+
+12
+00:01:12,812 --> 00:01:21,249
+It identifies the affected file, the relevant line, the security concern, and the safest remediation direction.
+
+13
+00:01:21,249 --> 00:01:24,008
+The result becomes a runbook.
+
+14
+00:01:24,008 --> 00:01:33,016
+The team can turn the finding into clear steps, set an accountable owner, and keep the decision visible from detection through resolution.
+
+15
+00:01:33,016 --> 00:01:37,595
+Privacy is part of the experience, not an afterthought.
+
+16
+00:01:37,595 --> 00:01:45,774
+Local mode clearly shows what is stored on the device, what stays private, and what is not connected to the cloud.
+
+17
+00:01:45,774 --> 00:01:54,361
+Finally, Judge Mode lets reviewers experience the full product journey without creating an account or touching any user data.
+
+18
+00:01:54,361 --> 00:02:03,274
+Aegis helps teams ship with confidence: understand the change, defend the boundary, and prove the path to a safer release.

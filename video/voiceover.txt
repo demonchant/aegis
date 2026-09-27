@@ -1,0 +1,19 @@
+Developers move fast. But in a complex codebase, one small change can open a security path nobody sees until it is too late. Aegis finds that risk before it ships.
+
+This is Aegis, a defensive security workspace built with IBM Bob in mind. It turns repository context into an understandable security conversation for the people building the software.
+
+The journey begins with a secure local account. Each workspace is protected with a salted password hash and a secure session, so the developer starts from a private place to reason about risk.
+
+From the workspace, a developer can submit a focused code change, or choose exactly which local repository files Aegis is allowed to inspect. The scope is visible before analysis begins.
+
+The local scan checks the selected source files for high impact patterns such as request controlled roles, unsafe HTML rendering, dynamic code execution, shell invocation, and possible hardcoded secrets.
+
+Instead of a vague warning, Aegis gives the developer evidence. It identifies the affected file, the relevant line, the security concern, and the safest remediation direction.
+
+The result becomes a runbook. The team can turn the finding into clear steps, set an accountable owner, and keep the decision visible from detection through resolution.
+
+Privacy is part of the experience, not an afterthought. Local mode clearly shows what is stored on the device, what stays private, and what is not connected to the cloud.
+
+Finally, Judge Mode lets reviewers experience the full product journey without creating an account or touching any user data.
+
+Aegis helps teams ship with confidence: understand the change, defend the boundary, and prove the path to a safer release.

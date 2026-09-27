@@ -1,0 +1,39 @@
+1
+00:00:00,000 --> 00:00:15,000
+Developers move fast. But one small change can open a security path nobody sees until it is too late.
+
+2
+00:00:15,000 --> 00:00:26,000
+Aegis finds that risk before it ships.
+
+3
+00:00:26,000 --> 00:00:39,000
+Aegis turns repository context into an understandable security conversation for software teams.
+
+4
+00:00:39,000 --> 00:00:52,000
+The journey begins with a secure local account and private workspace.
+
+5
+00:00:52,000 --> 00:01:05,000
+Developers submit a focused change or choose exactly which repository files Aegis can inspect.
+
+6
+00:01:05,000 --> 00:01:18,000
+The local scan checks for request controlled roles, unsafe HTML, dynamic execution, shell invocation, and possible secrets.
+
+7
+00:01:18,000 --> 00:01:31,000
+Aegis provides evidence: the affected file, relevant line, risk, and safest remediation direction.
+
+8
+00:01:31,000 --> 00:01:43,000
+The result becomes a runbook with clear steps and an accountable owner.
+
+9
+00:01:43,000 --> 00:01:53,000
+Local mode makes privacy visible: what is stored, what stays private, and what is not connected to the cloud.
+
+10
+00:01:53,000 --> 00:02:02,000
+Judge Mode gives reviewers the full journey without an account or access to user data.

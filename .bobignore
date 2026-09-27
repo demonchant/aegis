@@ -1,8 +1,7 @@
-data/
 .env
 .env.*
+data/
 node_modules/
 coverage/
-evidence/reviews/
+video/
 *.mp4
-.vercel/

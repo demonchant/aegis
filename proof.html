@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Independent, machine-readable evidence for the Aegis IBM Bob security workflow." />
+  <title>Aegis | Verified proof</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+  <header class="nav shell">
+    <a class="brand" href="index.html"><span class="brandMark">A</span><span>Aegis</span></a>
+    <nav class="navLinks"><a href="index.html">Overview</a><a class="active" href="proof.html">Proof</a><a href="workspace.html?judge=1">Judge demo</a></nav>
+  </header>
+  <main class="shell" style="padding-top:48px;padding-bottom:80px">
+    <section class="reviewHero">
+      <div><div class="eyebrow"><span class="pulse"></span> Machine-verifiable evidence</div><h1>Trust the receipt, not the screenshot.</h1><p>Aegis binds every Bob finding to exact repository bytes, then rechecks those bytes before publishing a canonical receipt.</p></div>
+      <div class="confidenceDial"><span id="proofState">…</span><small>proof state</small></div>
+    </section>
+    <section class="reviewLayout">
+      <div class="findingCard">
+        <span class="eyebrow">Canonical receipt</span>
+        <h2 id="proofTitle">Loading verified evidence…</h2>
+        <div class="impactGrid"><div><small>Review</small><b id="reviewId">—</b></div><div><small>Findings</small><b id="findingCount">—</b></div><div><small>Files current</small><b id="fileStatus">—</b></div></div>
+        <div class="evidence"><span>SHA-256 receipt</span><pre id="receipt">—</pre></div>
+        <div class="evidence"><span>Anchored finding</span><p id="findingClaim">—</p><code id="findingLocation">—</code></div>
+      </div>
+      <aside class="bobPanel"><div class="bobTop"><div><span class="bobOrb">B</span><div><b>IBM Bob + Aegis MCP</b><small>Native review lifecycle</small></div></div></div><div class="bobThread"><div class="bobMessage"><span class="bobOrb small">B</span><p>Bob inspects repository context and submits structured findings through Aegis tools. Aegis independently anchors and verifies the evidence before this page can show VERIFIED.</p></div></div></aside>
+    </section>
+    <p class="lead" id="proofError" hidden></p>
+  </main>
+  <script src="proof.js"></script>
+</body>
+</html>

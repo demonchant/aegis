@@ -1,0 +1,8 @@
+.git/
+.bobignore
+data/
+node_modules/
+tests/
+video/
+1.mp4
+HACKATHON_WINNING_BUILD_GUIDELINES.md
