@@ -8,7 +8,7 @@ for (const file of required) {
 }
 
 const scanExtensions = new Set(['.js', '.json', '.html', '.css', '.md']);
-const ignored = new Set(['.git', 'data', 'node_modules', 'evidence']);
+const ignored = new Set(['.git', 'data', 'dist', 'node_modules', 'evidence']);
 function scan(directory) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
     if (ignored.has(entry.name)) continue;
@@ -21,4 +21,21 @@ function scan(directory) {
   }
 }
 scan(root);
-console.log(`Build gate passed with ${required.length} required artifacts and no committed Bob key.`);
+
+const output = path.join(root, 'dist');
+if (output !== path.join(root, 'dist')) throw new Error('Static output path escaped the workspace.');
+fs.rmSync(output, { recursive: true, force: true });
+fs.mkdirSync(output, { recursive: true });
+const publicFiles = [
+  'index.html', 'workspace.html', 'review.html', 'guide.html', 'settings.html', 'account.html', 'data-handling.html', 'repository.html', 'proof.html',
+  'styles.css', 'app.css', 'account.css', 'hero-carousel.css',
+  'app.js', 'owner.js', 'privacy.js', 'repository.js', 'review-live.js', 'hero-carousel.js', 'proof.js',
+  'assets', 'evidence/canonical-proof.json',
+];
+for (const item of publicFiles) {
+  const source = path.join(root, item);
+  const destination = path.join(output, item);
+  fs.mkdirSync(path.dirname(destination), { recursive: true });
+  fs.cpSync(source, destination, { recursive: true });
+}
+console.log(`Build gate passed with ${required.length} required artifacts, no committed Bob key, and ${publicFiles.length} static export entries.`);

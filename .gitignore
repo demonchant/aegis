@@ -6,3 +6,6 @@ coverage/
 evidence/reviews/
 *.mp4
 .vercel/
+dist/
+
+.vercel
